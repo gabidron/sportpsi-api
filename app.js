@@ -18,10 +18,10 @@ const websData = new Web();
 const webReqData = new WebReq();
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination: function(req, file, cb) {
         cb(null, './uploads/')
     },
-    filename: function (req, file, cb) {
+    filename: function(req, file, cb) {
         cb(null, `${file.fieldname}-${Date.now()}${getExt(file.mimetype)}`)
     }
 });
@@ -42,7 +42,7 @@ const getExt = (mimetype) => {
 var upload = multer({ storage: storage });
 
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
 });
@@ -188,8 +188,8 @@ app.post("/api/webs/delete/:id", (req, res) => {
 app.get("/api/web/:id", (req, res) => {
     let webs = websData.get();
     let WEB;
-    for(web of webs){
-        if(web.id == req.params.id){
+    for (web of webs) {
+        if (web.id == req.params.id) {
             WEB = web;
         }
     }
@@ -319,4 +319,4 @@ app.post("/api/message/:message/:email", (req, res) => {
     res.status(201).send('ok');
 })
 
-app.listen(process.env.PORT || 3000, () => console.log("Listening on http://localhost:3000/"));
+app.listen(process.env.PORT || 3000, () => console.log(`Listening on ${process.env.PORT || 3000}`));
